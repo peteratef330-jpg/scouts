@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مجموعة الأمير تادرس الكشفية</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Arial,sans-serif}
+body{background:linear-gradient(135deg,#e8eaf6 0%,#f3e5f5 100%);min-height:100vh}
+.hidden{display:none!important}
+
+/* LOGIN */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a237e 0%,#283593 50%,#1b5e20 100%)}
+.login-card{background:#fff;border-radius:20px;padding:2.5rem;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.logo-area{text-align:center;margin-bottom:1.5rem}
+.logo-area h1{font-size:16px;font-weight:700;color:#1a237e;margin-top:10px;line-height:1.5}
+.logo-area p{font-size:11px;color:#666;margin-top:3px;line-height:1.6}
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:13px;color:#444;margin-bottom:5px;font-weight:600}
+.field select,.field input{width:100%;padding:11px 14px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;background:#fff;color:#111;transition:all 0.2s}
+.field select:focus,.field input:focus{outline:none;border-color:#1a237e;box-shadow:0 0 0 3px rgba(26,35,126,0.1)}
+.btn-login{width:100%;padding:13px;background:linear-gradient(135deg,#1a237e,#283593);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-top:0.5rem;transition:all 0.2s;letter-spacing:0.5px}
+.btn-login:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(26,35,126,0.4)}
+.err{color:#c62828;font-size:13px;margin-top:8px;text-align:center;min-height:20px}
+.hint{margin-top:1rem;padding-top:1rem;border-top:1px solid #eee;font-size:11px;color:#aaa;text-align:center;line-height:1.7}
+
+/* MAIN */
+.main-wrap{max-width:1000px;margin:0 auto;padding:1rem}
+
+/* NAV */
+.nav{background:linear-gradient(135deg,#1a237e,#283593);color:#fff;border-radius:14px;margin-bottom:1rem;box-shadow:0 6px 20px rgba(26,35,126,0.4);overflow:hidden}
+.nav-logo{width:58px;height:58px;border-radius:50%;border:2.5px solid rgba(255,255,255,0.5);object-fit:contain;background:#fff}
+.nav-title{font-size:16px;font-weight:700;color:#fff;white-space:nowrap}
+
+/* TABS */
+.tabs{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
+.tab{padding:10px 20px;border:2px solid #ddd;border-radius:10px;font-size:13px;cursor:pointer;background:#fff;color:#555;font-weight:600;transition:all 0.2s}
+.tab.active{background:var(--team-color,linear-gradient(135deg,#1a237e,#283593));color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+.tab:hover:not(.active){background:#e8eaf6;border-color:#9fa8da;color:#1a237e}
+
+/* SECTIONS */
+.section{background:#fff;border-radius:14px;padding:1.5rem;margin-bottom:1rem;box-shadow:0 4px 16px rgba(0,0,0,0.08)}
+.section-title{font-size:16px;font-weight:700;color:#1a237e;margin-bottom:1rem;padding-bottom:10px;border-bottom:3px solid #e8eaf6;display:flex;align-items:center;gap:8px}
+
+/* STATS */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:1rem}
+.stat-card{background:linear-gradient(135deg,#e8eaf6,#c5cae9);border-radius:12px;padding:16px;text-align:center;box-shadow:0 2px 8px rgba(26,35,126,0.1)}
+.stat-num{font-size:32px;font-weight:700;color:#1a237e}
+.stat-lbl{font-size:12px;color:#555;margin-top:4px;font-weight:500}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;border-radius:10px}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;min-width:400px}
+.tbl th{text-align:right;padding:12px 14px;background:linear-gradient(135deg,#1a237e,#283593);color:#fff;font-weight:600}
+.tbl th:first-child{border-radius:0 8px 0 0}
+.tbl th:last-child{border-radius:8px 0 0 0}
+.tbl td{padding:10px 14px;border-bottom:1px solid #f0f0f0;color:#333}
+.tbl tr:hover td{background:#f5f7ff}
+.tbl tr:last-child td{border-bottom:none}
+
+/* FORMS */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.form-row.three{grid-template-columns:1fr 1fr 1fr}
+.form-input{padding:10px 13px;border:2px solid #e0e0e0;border-radius:8px;font-size:13px;width:100%;color:#111;background:#fff;transition:border-color 0.2s}
+.form-input:focus{outline:none;border-color:#1a237e;box-shadow:0 0 0 3px rgba(26,35,126,0.08)}
+textarea.form-input{resize:vertical;min-height:90px}
+.btn-add{padding:10px 20px;background:linear-gradient(135deg,#2e7d32,#388e3c);color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-weight:600;box-shadow:0 3px 10px rgba(46,125,50,0.3);transition:all 0.2s}
+.btn-add:hover{transform:translateY(-1px);box-shadow:0 5px 15px rgba(46,125,50,0.4)}
+.btn-save{padding:10px 24px;background:linear-gradient(135deg,#1a237e,#283593);color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-weight:600;margin-top:12px;box-shadow:0 3px 10px rgba(26,35,126,0.3);transition:all 0.2s}
+.btn-save:hover{transform:translateY(-1px);box-shadow:0 5px 15px rgba(26,35,126,0.4)}
+.btn-del{background:none;border:none;color:#c62828;cursor:pointer;font-size:18px;padding:2px 8px;transition:transform 0.2s}
+.btn-del:hover{transform:scale(1.2)}
+.btn-sm{padding:5px 12px;border:1.5px solid #ddd;border-radius:6px;font-size:12px;cursor:pointer;background:#fff;color:#555;transition:all 0.2s}
+.btn-sm:hover{background:#f5f7ff;border-color:#9fa8da;color:#1a237e}
+
+/* BADGES */
+.badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600}
+.badge-present{background:#e8f5e9;color:#2e7d32}
+.badge-absent{background:#ffebee;color:#c62828}
+.badge-excused{background:#fff8e1;color:#e65100}
+.badge-blue{background:#e8eaf6;color:#1a237e}
+.badge-pink{background:#fce4ec;color:#c2185b}
+
+/* ATTENDANCE */
+.att-row{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid #f5f5f5}
+.att-name{flex:1;font-size:14px;font-weight:500}
+.att-btns{display:flex;gap:5px}
+.att-btn{padding:5px 14px;border-radius:6px;font-size:12px;cursor:pointer;border:2px solid transparent;font-weight:600;transition:all 0.15s}
+.att-btn.p{background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7}.att-btn.p.sel{background:#2e7d32;color:#fff;box-shadow:0 2px 8px rgba(46,125,50,0.3)}
+.att-btn.a{background:#ffebee;color:#c62828;border-color:#ef9a9a}.att-btn.a.sel{background:#c62828;color:#fff;box-shadow:0 2px 8px rgba(198,40,40,0.3)}
+.att-btn.e{background:#fff8e1;color:#e65100;border-color:#ffe082}.att-btn.e.sel{background:#e65100;color:#fff;box-shadow:0 2px 8px rgba(230,81,0,0.3)}
+
+/* MINUTE ITEMS */
+.minute-item{background:linear-gradient(135deg,#f8f9ff,#f0f4ff);border-radius:10px;padding:14px 16px;margin-bottom:10px;border-right:4px solid #1a237e;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+.minute-date{font-size:11px;color:#888;margin-bottom:5px;font-weight:500}
+.minute-text{font-size:13px;color:#333;line-height:1.7}
+
+/* ADMIN */
+.team-row{background:linear-gradient(135deg,#f8f9ff,#f0f4ff);border-radius:10px;padding:14px 16px;margin-bottom:10px;border-right:4px solid #1a237e;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,0.05);transition:transform 0.2s}
+.team-row:hover{transform:translateX(-3px)}
+.team-name{font-size:15px;font-weight:700;color:#1a237e}
+.team-stats{display:flex;gap:16px;flex-wrap:wrap}
+.team-stat{font-size:12px;color:#555;font-weight:500}
+
+.empty{text-align:center;padding:3rem;color:#bbb;font-size:14px}
+.loading{text-align:center;padding:2rem;color:#888;font-size:14px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a237e;color:#fff;padding:12px 28px;border-radius:10px;font-size:14px;z-index:9999;opacity:0;transition:opacity 0.3s;pointer-events:none;box-shadow:0 4px 16px rgba(26,35,126,0.4);font-weight:500}
+.toast.show{opacity:1}
+
+@media(max-width:600px){
+  .form-row{grid-template-columns:1fr}
+  .form-row.three{grid-template-columns:1fr 1fr}
+  .stat-grid{grid-template-columns:repeat(3,1fr)}
+  .stat-num{font-size:24px}
+  .att-btn{padding:4px 10px;font-size:11px}
+  .tabs{gap:5px}
+  .tab{padding:8px 12px;font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- LOGIN PAGE -->
+<div id="loginPage" style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#c8b99a;padding:20px;font-family:Arial,sans-serif">
+  <div style="width:100%;max-width:460px;position:relative">
+    <div style="position:relative;min-height:650px">
+      
+      <!-- إطار الحبال -->
+      <img src="https://i.postimg.cc/FRYvxWhM/atar-page-0001.jpg" 
+        style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:fill;z-index:1;border-radius:4px;display:block">
+      
+      <!-- المحتوى -->
+      <div style="position:absolute;top:50px;left:45px;right:45px;bottom:50px;z-index:2;
+        background:rgba(255,253,245,0.94);border-radius:8px;padding:16px 16px;
+        box-shadow:0 2px 12px rgba(0,0,0,0.1);display:flex;flex-direction:column;justify-content:space-between">
+        
+        <!-- لوجو المجموعة في الخلفية -->
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.07;pointer-events:none">
+          <img src="https://i.postimg.cc/qv7s3HT1/file-000000009d48722f90a51ae90b8d1f18-(1).png" style="width:260px;height:260px;object-fit:contain">
+        </div>
+
+        <div style="position:relative;z-index:1">
+
+          <!-- اللوجوهات الثلاثة -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <img src="https://i.postimg.cc/qv7s3HT1/file-000000009d48722f90a51ae90b8d1f18-(1).png" 
+              style="width:72px;height:72px;object-fit:contain">
+            <img src="https://i.postimg.cc/T2HD69CG/slyb-page-0001.png"
+              style="width:50px;height:66px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.25))">
+            <img src="https://i.postimg.cc/D8QB233T/lwjw-alamant.png" 
+              style="width:72px;height:72px;object-fit:contain">
+          </div>
+
+          <!-- خط ذهبي -->
+          <div style="height:1.5px;background:linear-gradient(90deg,transparent,#8B6914,#ffd700,#8B6914,transparent);margin-bottom:8px"></div>
+
+          <!-- لوجو الكشافة -->
+          <div style="text-align:center;margin-bottom:8px">
+            <img src="https://i.postimg.cc/x1T0sDVP/download.png" style="width:55px;height:55px;object-fit:contain">
+          </div>
+
+          <!-- النصوص -->
+          <div style="text-align:center;margin-bottom:10px">
+            <div style="font-size:11.5px;font-weight:900;color:#4a148c;margin-bottom:2px">✦ مطرانية شبرا الخيمة وتوابعها ✦</div>
+            <div style="font-size:11px;font-weight:800;color:#3e2000;margin-bottom:6px;border-top:1.5px solid #d4b86a;border-bottom:1.5px solid #d4b86a;padding:3px 0;line-height:1.5">
+              كنيسة الشهيد العظيم مارجرجس والأنبا شنودة رئيس المتوحدين
+            </div>
+            <div style="font-size:18px;font-weight:900;color:#1a237e;margin-bottom:2px">مجموعة الأمير تادرس الكشفية</div>
+            <div style="font-size:11px;font-weight:800;color:#1a237e;letter-spacing:1.5px;direction:ltr;margin-bottom:4px">Prince Tadros Scouts Group</div>
+            <div style="display:inline-block;background:linear-gradient(135deg,#8B6914,#ffd700,#8B6914);color:#fff;font-size:10px;font-weight:800;padding:2px 14px;border-radius:20px">
+              ✦ سكرتارية الكشافة والمرشدات ✦
+            </div>
+          </div>
+
+          <!-- خط ذهبي -->
+          <div style="height:1.5px;background:linear-gradient(90deg,transparent,#8B6914,#ffd700,#8B6914,transparent);margin-bottom:10px"></div>
+
+          <!-- فورم الدخول -->
+          <div style="margin-bottom:8px">
+            <label style="display:block;font-size:12px;color:#1a237e;font-weight:800;margin-bottom:4px">🏕 اختر فريقك</label>
+            <select id="loginTeam" style="width:100%;padding:8px 12px;border:2px solid #8B6914;border-radius:7px;font-size:13px;background:#fffdf5;color:#1a237e;box-sizing:border-box;font-weight:600">
+              <option value="">-- اختر الفريق --</option>
+              <option value="baraem">براعم</option>
+              <option value="cubs">أشبال</option>
+              <option value="flowers">زهرات</option>
+              <option value="scouts">كشاف</option>
+              <option value="guides">مرشدات</option>
+              <option value="senior">كشاف متقدم</option>
+              <option value="rangers">رائدات</option>
+              <option value="rovers">جوالة</option>
+              <option value="leaders">قادة</option>
+              <option value="special">ذوي الهمم</option>
+              <option value="custody">العهدة</option>
+              <option value="admin">المشرف العام</option>
+            </select>
+          </div>
+          <div style="margin-bottom:8px">
+            <label style="display:block;font-size:12px;color:#1a237e;font-weight:800;margin-bottom:4px">🔐 كلمة المرور</label>
+            <input type="password" id="loginPass" placeholder="أدخل كلمة المرور" 
+              onkeydown="if(event.key==='Enter')doLogin()"
+              style="width:100%;padding:8px 12px;border:2px solid #8B6914;border-radius:7px;font-size:13px;background:#fffdf5;color:#1a237e;box-sizing:border-box;font-weight:600">
+          </div>
+          
+          <button onclick="doLogin()" 
+            style="width:100%;padding:10px;background:linear-gradient(135deg,#1a237e,#283593);color:#fff;border:none;border-radius:7px;font-size:14px;font-weight:900;cursor:pointer;box-shadow:0 4px 12px rgba(26,35,126,0.4);letter-spacing:1.5px;border-bottom:3px solid #0d1657;margin-bottom:4px">
+            ✦ دخـــول ✦
+          </button>
+          <div id="loginErr" style="color:#c62828;font-size:11px;text-align:center;min-height:12px;font-weight:600"></div>
+
+        </div>
+
+        <!-- التوقيعات في الأسفل -->
+        <div>
+          <div style="height:1.5px;background:linear-gradient(90deg,transparent,#8B6914,#ffd700,#8B6914,transparent);margin-bottom:8px"></div>
+          <table style="width:100%;border-collapse:collapse;direction:rtl">
+            <tr>
+              <td style="text-align:center;padding:0 2px;border-left:1px solid #d4c090;width:25%">
+                <div style="font-size:9px;font-weight:800;color:#1a237e;margin-bottom:4px">قائد السكرتارية</div>
+                <div style="font-size:8px;color:#555;border-top:1px solid #8B6914;padding-top:3px">ق / ............</div>
+              </td>
+              <td style="text-align:center;padding:0 2px;border-left:1px solid #d4c090;width:25%">
+                <div style="font-size:9px;font-weight:800;color:#1a237e;margin-bottom:4px">مدير المجموعة</div>
+                <div style="font-size:8px;color:#555;border-top:1px solid #8B6914;padding-top:3px">ق / ............</div>
+              </td>
+              <td style="text-align:center;padding:0 2px;border-left:1px solid #d4c090;width:25%">
+                <div style="font-size:9px;font-weight:800;color:#1a237e;margin-bottom:4px">مساعد المدير</div>
+                <div style="font-size:8px;color:#555;border-top:1px solid #8B6914;padding-top:3px">ق / ............</div>
+              </td>
+              <td style="text-align:center;padding:0 2px;width:25%">
+                <div style="font-size:9px;font-weight:800;color:#1a237e;margin-bottom:4px">الأب المسؤول</div>
+                <div style="font-size:8px;font-weight:700;color:#1a237e;border-top:2px solid #8B6914;padding-top:4px;white-space:nowrap">القمص متاؤس طلعت</div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="mainApp" class="hidden">
+  <div class="main-wrap">
+    <div class="nav" style="padding:10px 14px">
+      <table style="width:100%;border-collapse:collapse">
+        <tr>
+          <!-- يمين: لوجو المجموعة فقط -->
+          <td style="width:30%;vertical-align:middle;text-align:right;padding:4px">
+            <div style="display:inline-flex;align-items:center;justify-content:flex-end;background:rgba(255,255,255,0.1);border-radius:12px;padding:8px 14px">
+              <img id="navLogo" src="https://i.postimg.cc/qv7s3HT1/file-000000009d48722f90a51ae90b8d1f18-(1).png" style="width:75px;height:75px;border-radius:50%;border:3px solid rgba(255,255,255,0.6);object-fit:contain;background:#fff;box-shadow:0 3px 12px rgba(0,0,0,0.25)" alt="لوجو المجموعة">
+              <div id="navTitle" style="display:none"></div>
+            </div>
+          </td>
+          <!-- وسط: صليب + بيانات -->
+          <td style="width:40%;vertical-align:middle;text-align:center;padding:6px">
+            <img src="https://i.postimg.cc/T2HD69CG/slyb-page-0001.png" 
+              style="display:block;margin:0 auto 5px;width:55px;height:72px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3))">
+            <div style="font-size:13px;font-weight:900;color:#fff;line-height:1.7;
+              text-shadow:0 1px 6px rgba(0,0,0,0.6),0 0 12px rgba(0,0,0,0.3);letter-spacing:0.5px">
+              ✦ مطرانية شبرا الخيمة وتوابعها ✦
+            </div>
+            <div style="font-size:12px;font-weight:900;color:#fff;line-height:1.7;
+              text-shadow:0 1px 6px rgba(0,0,0,0.6),0 0 12px rgba(0,0,0,0.3);
+              border-top:1px solid rgba(255,215,0,0.5);border-bottom:1px solid rgba(255,215,0,0.5);
+              padding:3px 0;margin:3px 0">
+              كنيسة الشهيد العظيم مارجرجس والأنبا شنودة رئيس المتوحدين
+            </div>
+            <div style="font-size:20px;font-weight:900;color:#0d1b6e;line-height:1.5;letter-spacing:0.5px">
+              مجموعة الأمير تادرس الكشفية
+            </div>
+            <div style="font-size:12px;font-weight:900;color:#0d1b6e;letter-spacing:1.5px;direction:ltr;margin-top:2px">
+              Prince Tadros Scouts Group
+            </div>
+          </td>
+          <!-- يسار: لوجو الأمانة -->
+          <td style="width:30%;vertical-align:middle;text-align:left;padding:4px">
+            <div style="display:inline-block;background:#fff;border-radius:50%;padding:5px;box-shadow:0 3px 12px rgba(0,0,0,0.25)">
+              <img src="https://i.postimg.cc/D8QB233T/lwjw-alamant.png" style="width:75px;height:75px;border-radius:50%;object-fit:contain;display:block" alt="لوجو الأمانة">
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem">
+      <!-- التابز على اليمين -->
+      <div class="tabs" id="mainTabs" style="margin-bottom:0;flex:1"></div>
+      <!-- زرار الخروج على الشمال -->
+      <button onclick="doLogout()" 
+        style="background:linear-gradient(135deg,#c62828,#b71c1c);color:#fff;border:none;
+        border-radius:8px;padding:7px 18px;font-size:13px;font-weight:700;cursor:pointer;
+        box-shadow:0 3px 10px rgba(198,40,40,0.4);white-space:nowrap;flex-shrink:0;margin-right:8px">
+        ⬅ تسجيل خروج
+      </button>
+    </div>
+
+    <div id="tab-dash" class="hidden"></div>
+    <div id="tab-members" class="hidden"></div>
+    <div id="tab-att" class="hidden"></div>
+    <div id="tab-minutes" class="hidden"></div>
+    <div id="tab-custody" class="hidden"></div>
+    <div id="tab-admin" class="hidden"></div>
+  </div>
+</div>
+
+<!-- Firebase SDKs -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set, push, get, remove, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDbVTp-d8cyg2dmND3PVDjWz0ad1B7uHnA",
+  authDomain: "prince-tadros-scouts.firebaseapp.com",
+  databaseURL: "https://prince-tadros-scouts-default-rtdb.firebaseio.com",
+  projectId: "prince-tadros-scouts",
+  storageBucket: "prince-tadros-scouts.firebasestorage.app",
+  messagingSenderId: "724791269837",
+  appId: "1:724791269837:web:510254c79c3633cfa5cc84"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const TEAMS = {
+  baraem:  {name:'فريق البراعم',   pass:'baraem123',  color:'#f57f17', color2:'#e65100', logo:'https://i.postimg.cc/PPb2tnns/lwjw-bra-m.png'},
+  cubs:    {name:'فريق الأشبال',   pass:'cubs123',    color:'#f9c800', color2:'#c8960a', logo:'https://i.postimg.cc/vcw0FHkH/lwjw-ashbal.png'},
+  flowers: {name:'فريق الزهرات',   pass:'flowers123', color:'#f9c800', color2:'#c8960a', logo:'https://i.postimg.cc/RN1XMxx4/lwjw-zhrat.png'},
+  scouts:  {name:'فريق الكشاف',    pass:'scouts123',  color:'#33691e', color2:'#1b5e20', logo:'https://i.postimg.cc/N58pgvvj/lwjw-kshaf-nhayy.png'},
+  guides:  {name:'فريق المرشدات',  pass:'guides123',  color:'#2e7d32', color2:'#1a5e20', logo:'https://i.postimg.cc/N58pgvv0/lwjw-mrshdat.png'},
+  senior:  {name:'كشاف متقدم',     pass:'senior123',  color:'#880e4f', color2:'#560027', logo:'https://i.postimg.cc/TpjCRvvY/lwjw-kshaf-mtqdm.png'},
+  rangers: {name:'فريق الرائدات',  pass:'rangers123', color:'#880e4f', color2:'#560027', logo:'https://i.postimg.cc/jL6ZsYYs/lwjw-raydat.png'},
+  rovers:  {name:'فريق الجوالة',   pass:'rovers123',  color:'#c62828', color2:'#8e0000', logo:'https://i.postimg.cc/GHPqcnnb/lwjw-jwalt-nhayy.png'},
+  leaders: {name:'فريق القادة',    pass:'leaders123', color:'#1a237e', color2:'#0d1b6e', logo:'https://i.postimg.cc/qv7s3HT1/file-000000009d48722f90a51ae90b8d1f18-(1).png'},
+  special: {name:'فريق ذوي الهمم',pass:'special123', color:'#7b1fa2', color2:'#4a0072', isSpecial:true, logo:''},
+  custody: {name:'فريق العهدة',    pass:'custody123', color:'#5d4037', color2:'#3e2723', isCustody:true, logo:'https://i.postimg.cc/rKGQ822V/lwjw-al-hdh.png'},
+  admin:   {name:'المشرف العام',   pass:'admin123',   color:'#8b1a1a', color2:'#5c0000', isAdmin:true, logo:'https://i.postimg.cc/qv7s3HT1/file-000000009d48722f90a51ae90b8d1f18-(1).png'}
+};
+
+let currentTeam = null;
+let attState = {};
+let unsubscribers = [];
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function dbRef(path) { return ref(db, path); }
+
+async function dbGet(path) {
+  const snap = await get(dbRef(path));
+  return snap.exists() ? snap.val() : null;
+}
+
+async function dbSet(path, val) { await set(dbRef(path), val); }
+async function dbPush(path, val) { await push(dbRef(path), val); }
+async function dbRemove(path) { await remove(dbRef(path)); }
+
+function dbListen(path, cb) {
+  const r = ref(db, path);
+  const unsub = onValue(r, snap => cb(snap.exists() ? snap.val() : null));
+  unsubscribers.push(unsub);
+  return unsub;
+}
+
+function stopListeners() {
+  unsubscribers.forEach(u => u());
+  unsubscribers = [];
+}
+
+// ===== LOGIN =====
+window.doLogin = function() {
+  const t = document.getElementById('loginTeam').value;
+  const p = document.getElementById('loginPass').value;
+  const err = document.getElementById('loginErr');
+  if (!t) { err.textContent = 'اختر الفريق'; return; }
+  if (!p) { err.textContent = 'أدخل كلمة المرور'; return; }
+  if (TEAMS[t].pass !== p) { err.textContent = 'كلمة المرور غير صحيحة'; return; }
+  currentTeam = t;
+  err.textContent = '';
+  // حفظ الجلسة
+  sessionStorage.setItem('currentTeam', t);
+  document.getElementById('loginPage').classList.add('hidden');
+  document.getElementById('mainApp').classList.remove('hidden');
+  initApp();
+};
+
+window.doLogout = function() {
+  stopListeners();
+  currentTeam = null;
+  sessionStorage.removeItem('currentTeam');
+  document.getElementById('mainApp').classList.add('hidden');
+  document.getElementById('loginPage').classList.remove('hidden');
+  document.getElementById('loginPass').value = '';
+};
+
+// تحقق من الجلسة عند فتح الصفحة
+window.addEventListener('load', function() {
+  const saved = sessionStorage.getItem('currentTeam');
+  if (saved && TEAMS[saved]) {
+    currentTeam = saved;
+    document.getElementById('loginPage').classList.add('hidden');
+    document.getElementById('mainApp').classList.remove('hidden');
+    initApp();
+  }
+});
+
+function initApp() {
+  const t = TEAMS[currentTeam];
+  document.getElementById('navTitle').textContent = t.name;
+  // Change nav color based on team
+  const navEl = document.querySelector('.nav');
+  if(navEl) {
+    navEl.style.background = `linear-gradient(135deg, ${t.color}, ${t.color2||t.color})`;
+    // Dark text for light colored teams
+    const textColor = t.textDark ? '#1a1a1a' : '#ffffff';
+    const subTextColor = t.textDark ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.9)';
+    const goldColor = t.textDark ? '#1a237e' : '#ffd700';
+    navEl.querySelectorAll('div[style*="color:#fff"], div[style*="color:rgba(255,255,255"]').forEach(el => {
+      if(el.style.color === '#fff' || el.style.color === 'rgb(255, 255, 255)') el.style.color = textColor;
+    });
+    document.getElementById('navTitle').style.color = textColor;
+    // Update nav text divs
+    const navTexts = navEl.querySelectorAll('td:nth-child(2) div');
+    navTexts.forEach((el,i) => {
+      if(i < navTexts.length-1) el.style.color = subTextColor;
+      else el.style.color = goldColor;
+    });
+  }
+  // Fix text color for light backgrounds (yellow teams)
+  const isLight = ['cubs','flowers','baraem'].includes(currentTeam);
+  if(navEl) {
+    const textColor = isLight ? '#333' : '#fff';
+    const subColor = isLight ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.9)';
+    navEl.querySelectorAll('div[style*="color:#fff"]').forEach(el => el.style.color = textColor);
+    navEl.querySelectorAll('div[style*="color:rgba(255,255,255"]').forEach(el => el.style.color = subColor);
+    // Fix nav title
+    const navTitleEl = document.getElementById('navTitle');
+    if(navTitleEl) navTitleEl.style.color = textColor;
+    // Fix logout button
+    const logoutBtn = navEl.querySelector('button');
+    if(logoutBtn) {
+      logoutBtn.style.color = textColor;
+      logoutBtn.style.borderColor = isLight ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.4)';
+      logoutBtn.style.background = isLight ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.2)';
+    }
+  }
+  // Always show group logo in nav
+  const navLogoEl = document.getElementById('navLogo');
+  navLogoEl.src = 'https://i.postimg.cc/qv7s3HT1/file-000000009d48722f90a51ae90b8d1f18-(1).png';
+  navLogoEl.style.display = '';
+  const tabs = document.getElementById('mainTabs');
+
+  if (t.isAdmin) {
+    tabs.innerHTML = `
+      <button class="tab active" onclick="showTab('dash',this)">📊 الرئيسية</button>
+      <button class="tab" onclick="showTab('admin',this)">🏕 جميع الفرق</button>`;
+  } else if (t.isCustody) {
+    tabs.innerHTML = `
+      <button class="tab active" onclick="showTab('dash',this)">📊 الرئيسية</button>
+      <button class="tab" onclick="showTab('custody',this)">📦 سجل العهدة</button>
+      <button class="tab" onclick="showTab('minutes',this)">📝 المحاضر</button>`;
+  } else {
+    const icon = t.isSpecial ? '💙' : '👥';
+    tabs.innerHTML = `
+      <button class="tab active" onclick="showTab('dash',this)">📊 الرئيسية</button>
+      <button class="tab" onclick="showTab('members',this)">${icon} الأفراد</button>
+      <button class="tab" onclick="showTab('att',this)">✅ الحضور</button>
+      <button class="tab" onclick="showTab('minutes',this)">📝 المحاضر</button>`;
+  }
+  showTab('dash', tabs.querySelector('.tab.active'));
+}
+
+window.showTab = function(name, el) {
+  // Update tab color to match team
+  const t = TEAMS[currentTeam];
+  document.querySelectorAll('.tab.active').forEach(tab => {
+    tab.style.background = `linear-gradient(135deg, ${t.color}, ${t.color2||t.color})`;
+  });
+  stopListeners();
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  if (el) el.classList.add('active');
+  ['dash','members','att','minutes','custody','admin'].forEach(n => {
+    document.getElementById('tab-'+n).classList.add('hidden');
+  });
+  const tabEl = document.getElementById('tab-'+name);
+  tabEl.classList.remove('hidden');
+  tabEl.innerHTML = '<div class="loading">جاري التحميل...</div>';
+
+  if (name === 'dash') renderDash(tabEl);
+  else if (name === 'members') renderMembers(tabEl);
+  else if (name === 'att') renderAtt(tabEl);
+  else if (name === 'minutes') renderMinutes(tabEl);
+  else if (name === 'custody') renderCustody(tabEl);
+  else if (name === 'admin') renderAdmin(tabEl);
+};
+
+// ===== DASH =====
+function renderDash(el) {
+  const tInfo = TEAMS[currentTeam];
+  const teamLogoUrl = tInfo.logo || '';
+  const specialSVG = tInfo.isSpecial ? `
+    <svg width="120" height="120" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="150" cy="150" r="145" fill="#4527a0"/>
+      <circle cx="150" cy="150" r="125" fill="none" stroke="#ce93d8" stroke-width="2"/>
+      <path d="M150,220 C82,180 57,134 57,102 C57,75 77,55 102,55 C120,55 137,67 150,82 C163,67 180,55 198,55 C223,55 243,75 243,102 C243,134 218,180 150,220 Z" fill="#e91e8c" stroke="#c2185b" stroke-width="2"/>
+      <path d="M150,208 C90,170 67,128 67,102 C67,80 84,65 102,65 C118,65 134,76 150,92 C166,76 182,65 198,65 C216,65 233,80 233,102 C233,128 210,170 150,208 Z" fill="#f06292"/>
+      <circle cx="108" cy="122" r="9" fill="#fff"/><rect x="103" y="133" width="10" height="17" fill="#fff" rx="4"/>
+      <line x1="97" y1="139" x2="103" y2="136" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="119" y1="136" x2="113" y2="139" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="104" y1="150" x2="100" y2="161" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="112" y1="150" x2="116" y2="161" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="150" cy="110" r="9" fill="#fff"/><rect x="145" y="121" width="10" height="17" fill="#fff" rx="4"/>
+      <line x1="139" y1="127" x2="145" y2="124" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="161" y1="124" x2="155" y2="127" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="146" y1="138" x2="142" y2="149" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="154" y1="138" x2="158" y2="149" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="192" cy="122" r="9" fill="#fff"/><rect x="187" y="133" width="10" height="17" fill="#fff" rx="4"/>
+      <line x1="181" y1="139" x2="187" y2="136" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="203" y1="136" x2="197" y2="139" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="188" y1="150" x2="184" y2="161" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="196" y1="150" x2="200" y2="161" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      <rect x="144" y="18" width="12" height="42" fill="#fff" rx="3"/>
+      <rect x="122" y="30" width="56" height="12" fill="#fff" rx="3"/>
+      <path d="M128,30 L150,54 L172,30 L166,25 Q150,44 134,25 Z" fill="#1565c0"/>
+      <ellipse cx="150" cy="33" rx="7" ry="5" fill="#0d47a1"/>
+      <text x="150" y="258" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold" fill="#fff">ذوي الهمم</text>
+    </svg>` : '';
+  const logoHtml = tInfo.isSpecial
+    ? `<div style="text-align:center;margin-bottom:1.5rem;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.15))">${specialSVG}<div style="font-size:22px;font-weight:900;color:${tInfo.color};margin-top:10px">${tInfo.name}</div></div>`
+    : teamLogoUrl
+      ? `<div style="text-align:center;margin-bottom:1.5rem"><img src="${teamLogoUrl}" style="width:130px;height:130px;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.15))" alt="لوجو الفريق"><div style="font-size:22px;font-weight:900;color:${tInfo.color};margin-top:10px;text-shadow:0 2px 4px rgba(0,0,0,0.1)">${tInfo.name}</div></div>`
+      : '';
+  const t = TEAMS[currentTeam];
+  dbListen(`teams/${currentTeam}`, data => {
+    const members = data?.members ? Object.entries(data.members) : [];
+    const minutes = data?.minutes ? Object.entries(data.minutes) : [];
+    const atts = data?.attendance ? Object.entries(data.attendance) : [];
+    const custodyItems = data?.custody ? Object.entries(data.custody) : [];
+
+    let statsHtml = '';
+    if (t.isCustody) {
+      const avail = custodyItems.filter(([,v]) => v.status === 'available').length;
+      statsHtml = `
+        <div class="stat-card"><div class="stat-num">${custodyItems.length}</div><div class="stat-lbl">إجمالي العهدة</div></div>
+        <div class="stat-card" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9)"><div class="stat-num" style="color:#2e7d32">${avail}</div><div class="stat-lbl">متاح</div></div>
+        <div class="stat-card" style="background:linear-gradient(135deg,#ffebee,#ffcdd2)"><div class="stat-num" style="color:#c62828">${custodyItems.length - avail}</div><div class="stat-lbl">مُسلَّم</div></div>`;
+    } else {
+      const lastAtt = atts.length ? atts[atts.length-1][1] : null;
+      const presentCount = lastAtt?.records ? Object.values(lastAtt.records).filter(r => r.status === 'p').length : 0;
+      statsHtml = `
+        <div class="stat-card"><div class="stat-num">${members.length}</div><div class="stat-lbl">عدد الأفراد</div></div>
+        <div class="stat-card"><div class="stat-num">${minutes.length}</div><div class="stat-lbl">المحاضر</div></div>
+        <div class="stat-card"><div class="stat-num">${atts.length ? presentCount+'/'+members.length : '—'}</div><div class="stat-lbl">آخر حضور</div></div>`;
+    }
+
+    const lastMins = minutes.slice(-3).reverse().map(([,m]) => `
+      <div class="minute-item">
+        <div class="minute-date">📅 ${m.date} — ${m.title}</div>
+        <div class="minute-text">${m.body.substring(0,150)}${m.body.length>150?'...':''}</div>
+      </div>`).join('') || '<div class="empty">لا توجد محاضر بعد</div>';
+
+    el.innerHTML = logoHtml + `
+      <div class="stat-grid">${statsHtml}</div>
+      <div class="section"><div class="section-title">📋 آخر المحاضر</div>${lastMins}</div>`;
+  });
+}
+
+// ===== MEMBERS =====
+function renderMembers(el) {
+  const t = TEAMS[currentTeam];
+  dbListen(`teams/${currentTeam}/members`, data => {
+    const members = data ? Object.entries(data) : [];
+
+    const rows = members.length ? members.map(([key, m]) => `
+      <tr>
+        <td><strong>${m.name||'—'}</strong></td>
+        <td>${m.phone||'—'}</td>
+        <td>${m.birth||'—'}</td>
+        <td>${m.rank||'—'}</td>
+        <td style="white-space:nowrap">
+          <button class="btn-sm" onclick="viewMember('${key}')" style="background:#e8eaf6;color:#1a237e" title="عرض">👁 عرض</button>
+          <button class="btn-sm" onclick="printMember('${key}')" style="background:#e8f5e9;color:#2e7d32" title="PDF">📄 PDF</button>
+          <button class="btn-del" onclick="deleteMember('${key}')" title="حذف">🗑</button>
+        </td>
+      </tr>`).join('') : `<tr><td colspan="5" class="empty">لا يوجد أفراد — أضف أول فرد!</td></tr>`;
+
+    el.innerHTML = `
+      <div class="section">
+        <div class="section-title">➕ إضافة فرد جديد</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+          <input class="form-input" id="m_name" placeholder="الاسم الكامل *">
+          <input class="form-input" id="m_birth" type="date" title="تاريخ الميلاد">
+          <input class="form-input" id="m_phone" placeholder="رقم الهاتف">
+          <input class="form-input" id="m_address" placeholder="العنوان">
+          <input class="form-input" id="m_location" placeholder="رابط لوكيشن جوجل ماب">
+          <input class="form-input" id="m_confessor" placeholder="أب الاعتراف">
+          <input class="form-input" id="m_school" placeholder="اسم المدرسة / الكلية">
+          <input class="form-input" id="m_grade" placeholder="السنة الدراسية">
+          <input class="form-input" id="m_national_id" placeholder="الرقم القومي">
+          <input class="form-input" id="m_guardian_job" placeholder="وظيفة ولي الأمر">
+          <input class="form-input" id="m_guardian_phone" placeholder="رقم هاتف ولي الأمر">
+          <input class="form-input" id="m_rank" placeholder="الرتبة الكشفية">
+          <input class="form-input" id="m_badges" placeholder="الشارات (افصل بفاصلة)">
+          <input class="form-input" id="m_join_date" type="date" title="تاريخ الالتحاق بالفريق">
+          <input class="form-input" id="m_hobbies" placeholder="الهوايات">
+          <div>
+            <label style="font-size:12px;color:#555;display:block;margin-bottom:4px">📷 صورة الفرد</label>
+            <input type="file" id="m_photo" accept="image/*" class="form-input" style="padding:4px;font-size:12px">
+          </div>
+        </div>
+        <button class="btn-add" onclick="addMember()">+ إضافة الفرد</button>
+      </div>
+      <div class="section">
+        <div class="section-title">👥 أفراد الفريق (${members.length})</div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>الاسم</th><th>الهاتف</th><th>الميلاد</th><th>الرتبة</th><th>إجراءات</th></tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+      </div>
+      <div id="memberModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:9000;overflow:auto;padding:20px">
+        <div style="background:#fff;border-radius:12px;max-width:600px;margin:20px auto;padding:24px;position:relative;direction:rtl">
+          <button onclick="document.getElementById('memberModal').style.display='none'" style="position:absolute;top:12px;left:12px;background:#ffebee;border:none;border-radius:50%;width:30px;height:30px;font-size:16px;cursor:pointer;color:#c62828">✕</button>
+          <div id="memberModalContent"></div>
+        </div>
+      </div>`;
+  });
+}
+
+window.addMember = async function() {
+  const name = document.getElementById('m_name')?.value.trim();
+  if (!name) { showToast('أدخل اسم الفرد'); return; }
+  
+  let photoData = '';
+  const photoFile = document.getElementById('m_photo')?.files[0];
+  if (photoFile) {
+    photoData = await new Promise(resolve => {
+      const reader = new FileReader();
+      reader.onload = e => resolve(e.target.result);
+      reader.readAsDataURL(photoFile);
+    });
+  }
+
+  const obj = {
+    name,
+    birth: document.getElementById('m_birth')?.value || '',
+    phone: document.getElementById('m_phone')?.value.trim() || '',
+    address: document.getElementById('m_address')?.value.trim() || '',
+    location: document.getElementById('m_location')?.value.trim() || '',
+    confessor: document.getElementById('m_confessor')?.value.trim() || '',
+    school: document.getElementById('m_school')?.value.trim() || '',
+    grade: document.getElementById('m_grade')?.value.trim() || '',
+    national_id: document.getElementById('m_national_id')?.value.trim() || '',
+    guardian_job: document.getElementById('m_guardian_job')?.value.trim() || '',
+    guardian_phone: document.getElementById('m_guardian_phone')?.value.trim() || '',
+    rank: document.getElementById('m_rank')?.value.trim() || '',
+    badges: document.getElementById('m_badges')?.value.trim() || '',
+    join_date: document.getElementById('m_join_date')?.value || '',
+    hobbies: document.getElementById('m_hobbies')?.value.trim() || '',
+    photo: photoData,
+    createdAt: new Date().toLocaleDateString('ar-EG')
+  };
+
+  await dbPush(`teams/${currentTeam}/members`, obj);
+  showToast('✅ تم إضافة الفرد بنجاح');
+  
+  ['m_name','m_phone','m_address','m_location','m_confessor','m_school','m_grade',
+   'm_national_id','m_guardian_job','m_guardian_phone','m_rank','m_badges','m_hobbies'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.value = '';
+  });
+  ['m_birth','m_join_date'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+  const photo = document.getElementById('m_photo'); if(photo) photo.value='';
+};
+
+window.viewMember = async function(key) {
+  const data = await dbGet(`teams/${currentTeam}/members/${key}`);
+  if (!data) return;
+  const t = TEAMS[currentTeam];
+  const modal = document.getElementById('memberModal');
+  const content = document.getElementById('memberModalContent');
+  
+  const fields = [
+    ['📅 تاريخ الميلاد', data.birth],
+    ['📱 رقم الهاتف', data.phone],
+    ['🏠 العنوان', data.address],
+    ['⛪ أب الاعتراف', data.confessor],
+    ['🏫 المدرسة / الكلية', data.school],
+    ['📚 السنة الدراسية', data.grade],
+    ['🪪 الرقم القومي', data.national_id],
+    ['💼 وظيفة ولي الأمر', data.guardian_job],
+    ['📞 هاتف ولي الأمر', data.guardian_phone],
+    ['🏅 الرتبة الكشفية', data.rank],
+    ['⭐ الشارات', data.badges],
+    ['📆 تاريخ الالتحاق', data.join_date],
+    ['🎨 الهوايات', data.hobbies],
+  ];
+
+  content.innerHTML = `
+    <div style="text-align:center;margin-bottom:16px;border-bottom:2px solid ${t.color};padding-bottom:12px">
+      ${data.photo ? `<img src="${data.photo}" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid ${t.color};margin-bottom:8px;display:block;margin:0 auto 8px">` 
+        : `<div style="width:100px;height:100px;border-radius:50%;background:#e8eaf6;display:inline-flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:8px">👤</div>`}
+      <div style="font-size:20px;font-weight:900;color:${t.color};margin-top:8px">${data.name}</div>
+      <div style="font-size:12px;color:#888">${t.name} — ${data.rank||'بدون رتبة'}</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
+      ${fields.map(([label, val]) => val ? `
+        <div style="background:#f8f9ff;border-radius:8px;padding:8px;border-right:3px solid ${t.color}">
+          <div style="font-size:10px;color:#888;margin-bottom:2px">${label}</div>
+          <div style="font-weight:700;color:#333;font-size:13px">${val}</div>
+        </div>` : '').join('')}
+      ${data.location ? `
+        <div style="background:#f8f9ff;border-radius:8px;padding:8px;border-right:3px solid ${t.color};grid-column:span 2">
+          <div style="font-size:10px;color:#888;margin-bottom:2px">📍 اللوكيشن</div>
+          <a href="${data.location}" target="_blank" style="color:#1a237e;font-weight:700;font-size:13px">📌 فتح على جوجل ماب</a>
+        </div>` : ''}
+    </div>
+    <div style="display:flex;gap:8px;justify-content:center">
+      <button onclick="printMember('${key}')" style="background:linear-gradient(135deg,#2e7d32,#388e3c);color:#fff;border:none;border-radius:8px;padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 3px 10px rgba(46,125,50,0.3)">📄 تحميل استمارة PDF</button>
+      <button onclick="document.getElementById('memberModal').style.display='none'" style="background:#f5f5f5;color:#555;border:none;border-radius:8px;padding:10px 20px;font-size:14px;cursor:pointer">إغلاق</button>
+    </div>`;
+  
+  modal.style.display = 'block';
+};
+
+window.printMember = async function(key) {
+  const data = await dbGet(`teams/${currentTeam}/members/${key}`);
+  if (!data) return;
+  const t = TEAMS[currentTeam];
+  const teamLogo = t.logo || 'https://i.postimg.cc/qv7s3HT1/file-000000009d48722f90a51ae90b8d1f18-(1).png';
+  const groupLogo = 'https://i.postimg.cc/qv7s3HT1/file-000000009d48722f90a51ae90b8d1f18-(1).png';
+  const frameImg = 'https://i.postimg.cc/HkwTrBgv/Chat-GPT-Image-29-ywnyw-2026-04-43-08-m.png';
+  const fileName = data.name + ' - ' + t.name;
+
+  const html = `<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>${fileName}</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+@page{size:A4;margin:0}
+body{width:210mm;background:#fff}
+.page{
+  width:210mm;height:297mm;
+  position:relative;
+  overflow:hidden;
+  page-break-after:always;
+}
+.frame{
+  position:absolute;top:0;left:0;
+  width:100%;height:100%;
+  object-fit:fill;z-index:0;
+}
+.content{
+  position:absolute;
+  top:52px;left:52px;right:52px;bottom:52px;
+  z-index:1;
+  display:flex;flex-direction:column;gap:8px;
+}
+
+/* الهيدر */
+.header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-bottom:10px;border-bottom:3px solid ${t.color};
+}
+.logo-group{width:90px;height:90px;object-fit:contain}
+.logo-team{width:90px;height:90px;object-fit:contain}
+.header-text{text-align:center;flex:1;padding:0 10px}
+.ep{font-size:12px;color:#555;margin-bottom:2px;font-weight:700}
+.ch{font-size:11px;color:#555;margin-bottom:4px;font-weight:600;line-height:1.4}
+.gr{font-size:18px;font-weight:900;color:${t.color}}
+
+/* عنوان */
+.form-title{
+  background:${t.color};color:#fff;
+  text-align:center;padding:9px;
+  font-size:17px;font-weight:900;
+  border-radius:6px;letter-spacing:0.5px;
+}
+
+/* صورة */
+.photo-row{
+  display:flex;align-items:center;gap:16px;
+  padding:12px 14px;
+  background:rgba(248,249,255,0.95);
+  border-radius:10px;border-right:5px solid ${t.color};
+}
+.mp{width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid ${t.color};flex-shrink:0}
+.photo-ph{width:120px;height:120px;border-radius:50%;border:4px solid ${t.color};display:flex;align-items:center;justify-content:center;font-size:46px;background:#f5f5f5;flex-shrink:0}
+.mi{flex:1}
+.mn{font-size:22px;font-weight:900;color:${t.color};margin-bottom:4px}
+.mr{font-size:14px;color:#666;font-weight:700;margin-bottom:8px}
+.dates{display:flex;gap:12px}
+.db{background:#fff;border:1.5px solid #ddd;border-radius:7px;padding:6px 12px;border-right:3px solid ${t.color}}
+.dl{font-size:11px;color:#888;margin-bottom:2px;font-weight:700}
+.dv{font-weight:800;color:#222;font-size:14px}
+.dv.light{color:#bbb;font-weight:500;font-size:13px}
+
+/* البيانات */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.field{border:1.5px solid #e0e0e0;border-radius:8px;padding:8px 12px;border-right:4px solid ${t.color};background:rgba(255,255,255,0.95)}
+.fl{font-size:12px;color:#1a237e;margin-bottom:4px;font-weight:900}
+.fv{font-size:14px;font-weight:700;color:#222}
+.full{grid-column:span 2}
+
+/* التوقيعات */
+.footer{
+  display:flex;justify-content:space-around;
+  padding-top:10px;border-top:2px solid ${t.color};
+  margin-top:auto;
+}
+.sig{text-align:center;flex:1;padding:0 10px}
+.sn{font-size:13px;font-weight:900;color:${t.color};margin-bottom:20px}
+.sl{border-top:1.5px solid #999;padding-top:5px;font-size:12px;color:#555;font-weight:700}
+
+@media print{
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <img class="frame" src="${frameImg}" alt="">
+  <div class="content">
+
+    <div class="header">
+      <img class="logo-group" src="${groupLogo}" alt="لوجو المجموعة">
+      <div class="header-text">
+        <div class="ep">مطرانية شبرا الخيمة وتوابعها</div>
+        <div class="ch">كنيسة الشهيد العظيم مارجرجس والأنبا شنودة رئيس المتوحدين</div>
+        <div class="gr">مجموعة الأمير تادرس الكشفية</div>
+      </div>
+      <img class="logo-team" src="${teamLogo}" alt="لوجو الفريق">
+    </div>
+
+    <div class="form-title">📋 استمارة تسجيل فرد — ${t.name}</div>
+
+    <div class="photo-row">
+      ${data.photo ? `<img class="mp" src="${data.photo}" alt="صورة">` : '<div class="photo-ph">👤</div>'}
+      <div class="mi">
+        <div class="mn">${data.name}</div>
+        <div class="mr">🏅 ${data.rank||'بدون رتبة'} — ${t.name}</div>
+        <div class="dates">
+          <div class="db">
+            <div class="dl">📅 تاريخ الميلاد</div>
+            <div class="dv">${data.birth||'—'}</div>
+          </div>
+          <div class="db">
+            <div class="dl" style="color:#ccc">📆 تاريخ الالتحاق</div>
+            <div class="dv light">${data.join_date||'—'}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="field"><div class="fl">📱 رقم الهاتف</div><div class="fv">${data.phone||'—'}</div></div>
+      <div class="field"><div class="fl">🪪 الرقم القومي</div><div class="fv">${data.national_id||'—'}</div></div>
+      <div class="field full"><div class="fl">🏠 العنوان</div><div class="fv">${data.address||'—'}</div></div>
+      <div class="field"><div class="fl">⛪ أب الاعتراف</div><div class="fv">${data.confessor||'—'}</div></div>
+      <div class="field"><div class="fl">🏫 المدرسة / الكلية</div><div class="fv">${data.school||'—'}</div></div>
+      <div class="field"><div class="fl">📚 السنة الدراسية</div><div class="fv">${data.grade||'—'}</div></div>
+      <div class="field"><div class="fl">💼 وظيفة ولي الأمر</div><div class="fv">${data.guardian_job||'—'}</div></div>
+      <div class="field"><div class="fl">📞 هاتف ولي الأمر</div><div class="fv">${data.guardian_phone||'—'}</div></div>
+      <div class="field full"><div class="fl">⭐ الشارات</div><div class="fv">${data.badges||'—'}</div></div>
+      <div class="field full"><div class="fl">🎨 الهوايات</div><div class="fv">${data.hobbies||'—'}</div></div>
+    </div>
+
+    <div class="footer">
+      <div class="sig">
+        <div class="sn">مدير المجموعة</div>
+        <div class="sl">ق / ............</div>
+      </div>
+      <div class="sig">
+        <div class="sn">الأب المسؤول</div>
+        <div class="sl">القمص متاؤس طلعت</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>
+window.onload = function() {
+  document.title = '${fileName}';
+  window.print();
+};
+<\/script>
+</body></html>`;
+
+  const blob = new Blob([html], {type: 'text/html;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const printFrame = document.createElement('iframe');
+  printFrame.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;border:none;z-index:99999;background:#fff';
+  printFrame.src = url;
+  document.body.appendChild(printFrame);
+  printFrame.onload = function() {
+    printFrame.contentWindow.document.title = fileName;
+    setTimeout(() => {
+      printFrame.contentWindow.print();
+      setTimeout(() => {
+        document.body.removeChild(printFrame);
+        URL.revokeObjectURL(url);
+      }, 3000);
+    }, 800);
+  };
+};
+
+
+window.deleteMember = async function(key) {
+  if (!confirm('حذف هذا الفرد؟')) return;
+  await dbRemove(`teams/${currentTeam}/members/${key}`);
+  showToast('🗑 تم الحذف');
+};
+
+// ===== ATTENDANCE =====
+function renderAtt(el) {
+  const today = new Date().toISOString().split('T')[0];
+  dbListen(`teams/${currentTeam}/members`, membersData => {
+    const members = membersData ? Object.values(membersData) : [];
+    attState = {};
+    members.forEach(m => attState[m.name] = 'p');
+
+    const attRows = members.length ? members.map(m => {
+      const safe = m.name.replace(/[^a-zA-Z0-9\u0600-\u06FF]/g,'_');
+      return `<div class="att-row">
+        <div class="att-name">${m.name}</div>
+        <div class="att-btns">
+          <button class="att-btn p sel" id="ap_${safe}" onclick="setAtt('${m.name}','p')">حضر</button>
+          <button class="att-btn a" id="aa_${safe}" onclick="setAtt('${m.name}','a')">غاب</button>
+          <button class="att-btn e" id="ae_${safe}" onclick="setAtt('${m.name}','e')">معذور</button>
+        </div>
+      </div>`;
+    }).join('') : '<div class="empty">أضف أفراداً أولاً من تبويب الأفراد</div>';
+
+    dbListen(`teams/${currentTeam}/attendance`, attData => {
+      const atts = attData ? Object.entries(attData) : [];
+      const histHtml = atts.length ? atts.slice().reverse().map(([,a]) => {
+        const recs = a.records ? Object.values(a.records) : [];
+        const p = recs.filter(r=>r.status==='p').length;
+        const ab = recs.filter(r=>r.status==='a').length;
+        const ex = recs.filter(r=>r.status==='e').length;
+        return `<div class="minute-item">
+          <div class="minute-date">📅 ${a.date} — ${a.activity}</div>
+          <div style="margin-top:5px">
+            <span class="badge badge-present">حضر ${p}</span> &nbsp;
+            <span class="badge badge-absent">غاب ${ab}</span> &nbsp;
+            <span class="badge badge-excused">معذور ${ex}</span>
+          </div>
+        </div>`;
+      }).join('') : '<div class="empty">لا يوجد سجل حضور بعد</div>';
+
+      el.innerHTML = `
+        <div class="section">
+          <div class="section-title">✅ تسجيل الحضور</div>
+          <div class="form-row">
+            <input class="form-input" id="attDate" type="date" value="${today}">
+            <input class="form-input" id="attActivity" placeholder="النشاط / الاجتماع">
+          </div>
+          ${attRows}
+          <button class="btn-save" onclick="saveAttendance()">💾 حفظ الحضور</button>
+        </div>
+        <div class="section"><div class="section-title">📋 سجل الحضور السابق</div>${histHtml}</div>`;
+    });
+  });
+}
+
+window.setAtt = function(name, status) {
+  attState[name] = status;
+  const safe = name.replace(/[^a-zA-Z0-9\u0600-\u06FF]/g,'_');
+  ['p','a','e'].forEach(s => {
+    const el = document.getElementById(s==='p'?'ap_'+safe:s==='a'?'aa_'+safe:'ae_'+safe);
+    if (el) el.classList.toggle('sel', s===status);
+  });
+};
+
+window.saveAttendance = async function() {
+  const date = document.getElementById('attDate')?.value;
+  const activity = document.getElementById('attActivity')?.value.trim();
+  if (!date||!activity) { showToast('أدخل التاريخ والنشاط'); return; }
+  const membersData = await dbGet(`teams/${currentTeam}/members`);
+  const members = membersData ? Object.values(membersData) : [];
+  if (!members.length) { showToast('لا يوجد أفراد'); return; }
+  const records = {};
+  members.forEach(m => { records[m.name.replace(/[^a-zA-Z0-9\u0600-\u06FF]/g,'_')] = {name:m.name, status:attState[m.name]||'a'}; });
+  await dbPush(`teams/${currentTeam}/attendance`, {date, activity, records});
+  showToast('✅ تم حفظ سجل الحضور');
+};
+
+// ===== MINUTES =====
+function renderMinutes(el) {
+  const today = new Date().toISOString().split('T')[0];
+  dbListen(`teams/${currentTeam}/minutes`, data => {
+    const minutes = data ? Object.entries(data) : [];
+    const listHtml = minutes.length ? minutes.slice().reverse().map(([key,m]) => `
+      <div class="minute-item">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+          <div class="minute-date">📅 ${m.date} — <strong>${m.title}</strong></div>
+          <button class="btn-sm" onclick="deleteMinute('${key}')">🗑 حذف</button>
+        </div>
+        <div class="minute-text">${m.body}</div>
+      </div>`).join('') : '<div class="empty">لا توجد محاضر بعد</div>';
+
+    el.innerHTML = `
+      <div class="section">
+        <div class="section-title">📝 تسجيل محضر جديد</div>
+        <div class="form-row">
+          <input class="form-input" id="minDate" type="date" value="${today}">
+          <input class="form-input" id="minTitle" placeholder="عنوان الاجتماع">
+        </div>
+        <textarea class="form-input" id="minBody" placeholder="محتوى المحضر..."></textarea>
+        <button class="btn-save" onclick="saveMinute()">💾 حفظ المحضر</button>
+      </div>
+      <div class="section"><div class="section-title">📋 المحاضر السابقة</div>${listHtml}</div>`;
+  });
+}
+
+window.saveMinute = async function() {
+  const date = document.getElementById('minDate')?.value;
+  const title = document.getElementById('minTitle')?.value.trim();
+  const body = document.getElementById('minBody')?.value.trim();
+  if (!date||!title||!body) { showToast('أكمل جميع الحقول'); return; }
+  await dbPush(`teams/${currentTeam}/minutes`, {date, title, body});
+  document.getElementById('minTitle').value='';
+  document.getElementById('minBody').value='';
+  showToast('✅ تم حفظ المحضر');
+};
+
+window.deleteMinute = async function(key) {
+  if (!confirm('حذف هذا المحضر؟')) return;
+  await dbRemove(`teams/${currentTeam}/minutes/${key}`);
+  showToast('🗑 تم الحذف');
+};
+
+// ===== CUSTODY =====
+function renderCustody(el) {
+  dbListen(`teams/${currentTeam}/custody`, data => {
+    const items = data ? Object.entries(data) : [];
+    const avail = items.filter(([,v])=>v.status==='available').length;
+
+    const rows = items.length ? items.map(([key,item]) => `
+      <tr>
+        <td><strong>${item.name}</strong></td>
+        <td>${item.qty}</td>
+        <td>${item.location||'—'}</td>
+        <td><span class="badge ${item.status==='available'?'badge-present':'badge-absent'}">${item.status==='available'?'متاح':'مُسلَّم'}</span></td>
+        <td>${item.assignedTo||'—'}</td>
+        <td>
+          <button class="btn-sm" onclick="toggleCustody('${key}','${item.status}')">${item.status==='available'?'تسليم':'استرداد'}</button>
+          <button class="btn-del" onclick="deleteCustody('${key}')">🗑</button>
+        </td>
+      </tr>`).join('') : `<tr><td colspan="6" class="empty">لا توجد عهدة مسجلة</td></tr>`;
+
+    el.innerHTML = `
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-num">${items.length}</div><div class="stat-lbl">إجمالي البنود</div></div>
+        <div class="stat-card" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9)"><div class="stat-num" style="color:#2e7d32">${avail}</div><div class="stat-lbl">متاح</div></div>
+        <div class="stat-card" style="background:linear-gradient(135deg,#ffebee,#ffcdd2)"><div class="stat-num" style="color:#c62828">${items.length-avail}</div><div class="stat-lbl">مُسلَّم</div></div>
+      </div>
+      <div class="section">
+        <div class="section-title">➕ إضافة بند عهدة جديد</div>
+        <div class="form-row three">
+          <input class="form-input" id="cusName" placeholder="اسم البند">
+          <input class="form-input" id="cusQty" placeholder="الكمية" type="number" min="1" value="1">
+          <input class="form-input" id="cusLoc" placeholder="مكان الحفظ">
+        </div>
+        <button class="btn-add" onclick="addCustody()">+ إضافة</button>
+      </div>
+      <div class="section">
+        <div class="section-title">📦 سجل العهدة</div>
+        <div class="tbl-wrap">
+          <table class="tbl" style="min-width:550px">
+            <thead><tr><th>البند</th><th>الكمية</th><th>مكان الحفظ</th><th>الحالة</th><th>مسلَّم لـ</th><th>إجراء</th></tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+      </div>`;
+  });
+}
+
+window.addCustody = async function() {
+  const name = document.getElementById('cusName')?.value.trim();
+  if (!name) { showToast('أدخل اسم البند'); return; }
+  await dbPush(`teams/${currentTeam}/custody`, {
+    name,
+    qty: document.getElementById('cusQty')?.value||1,
+    location: document.getElementById('cusLoc')?.value.trim()||'',
+    status: 'available',
+    assignedTo: ''
+  });
+  showToast('✅ تم إضافة البند');
+  ['cusName','cusLoc'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  const q=document.getElementById('cusQty');if(q)q.value='1';
+};
+
+window.toggleCustody = async function(key, status) {
+  if (status === 'available') {
+    const to = prompt('تسليم لـ (اسم الشخص):');
+    if (!to) return;
+    await dbSet(`teams/${currentTeam}/custody/${key}/status`, 'assigned');
+    await dbSet(`teams/${currentTeam}/custody/${key}/assignedTo`, to);
+    showToast('✅ تم التسليم');
+  } else {
+    if (!confirm('استرداد هذا البند؟')) return;
+    await dbSet(`teams/${currentTeam}/custody/${key}/status`, 'available');
+    await dbSet(`teams/${currentTeam}/custody/${key}/assignedTo`, '');
+    showToast('✅ تم الاسترداد');
+  }
+};
+
+window.deleteCustody = async function(key) {
+  if (!confirm('حذف هذا البند؟')) return;
+  await dbRemove(`teams/${currentTeam}/custody/${key}`);
+  showToast('🗑 تم الحذف');
+};
+
+// ===== ADMIN =====
+function renderAdmin(el) {
+  const teamKeys = Object.keys(TEAMS).filter(k=>k!=='admin');
+  el.innerHTML = '<div class="section"><div class="section-title">🏕 إحصاءات جميع الفرق</div><div id="adminContent"><div class="loading">جاري التحميل...</div></div></div>';
+
+  dbListen('teams', allData => {
+    const content = document.getElementById('adminContent');
+    if (!content) return;
+    const html = teamKeys.map(k => {
+      const t = TEAMS[k];
+      const tData = allData?.[k] || {};
+      const members = tData.members ? Object.keys(tData.members).length : 0;
+      const minutes = tData.minutes ? Object.keys(tData.minutes).length : 0;
+      const atts = tData.attendance ? Object.keys(tData.attendance).length : 0;
+      const custody = tData.custody ? Object.keys(tData.custody).length : 0;
+      const tag = t.isSpecial ? '<span class="badge badge-blue">ذوو الهمم</span>' : t.isCustody ? '<span class="badge badge-pink">عهدة</span>' : '';
+      const extraStat = t.isCustody
+        ? `<span class="team-stat">📦 ${custody} بند</span>`
+        : `<span class="team-stat">📅 ${atts} اجتماع</span>`;
+      return `<div class="team-row" style="border-right-color:${t.color}">
+        <div class="team-name">${t.name} ${tag}</div>
+        <div class="team-stats">
+          ${t.isCustody?'':`<span class="team-stat">👥 ${members} فرد</span>`}
+          <span class="team-stat">📝 ${minutes} محضر</span>
+          ${extraStat}
+        </div>
+      </div>`;
+    }).join('');
+    content.innerHTML = html;
+  });
+}
+
+</script>
+</body>
+</html>
